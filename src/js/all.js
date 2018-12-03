@@ -1,0 +1,1 @@
+var a=98,b="阿斯蒂芬";console.log(a+b);for(var i=0;i<5;i++)console.log(i);
