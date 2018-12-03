@@ -53,6 +53,6 @@ gulp.task('Servers', function() {
 })
 
 //开发环境
-gulp.task('dev', gulp.series('Bsass', 'bjs', 'Servers', 'watch'))
+gulp.task('dev', gulp.series('Bsass', 'bjs', 'Servers', 'watch'));
 
 //线上环境
