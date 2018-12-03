@@ -10,6 +10,10 @@ var autoprefixer = require('gulp-autoprefixer'); //添加前缀
 
 var concat = require('gulp-concat'); //合并文件
 
+var server = require('gulp-webserver'); //起服务
+
+// var babel = require('gulp-babel'); //es5->es6
+
 //css
 gulp.task('Bsass', function() {
     return gulp.src('./src/sass/*.scss')
@@ -29,3 +33,26 @@ gulp.task('bjs', function() {
         .pipe(uglify())
         .pipe(gulp.dest('./src/js'))
 });
+//监听
+gulp.task('watch', function() {
+    gulp.watch('./src/sass/*.scss', gulp.series('Bsass'));
+    gulp.watch('./src/js/*.js', gulp.series('bjs'));
+});
+
+//起服务
+gulp.task('Servers', function() {
+    return gulp.src('src')
+        .pipe(server({
+            port: 8989,
+            livereload: true,
+            midderware: function(req, res, next) {
+
+            }
+        }))
+
+})
+
+//开发环境
+gulp.task('dev', gulp.series('Bsass', 'bjs', 'Servers', 'watch'))
+
+//线上环境
